@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CoffeeBeans.Models;
+using Xamarin.Forms;
 
 namespace CoffeeBeans.Services
 {
@@ -14,12 +15,12 @@ namespace CoffeeBeans.Services
         {
             items = new List<Item>()
             {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." }
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Spicy Coffee", Description="Description.", Price=80, ImageSource="CoffeeBeansOnPlant.jpg"},
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Joe's Beans", Description="Description.", Price=60, ImageSource="RobustaCoffeeBeans.jpg"},
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Bob's Coffee", Description="Description.", Price=60.5f, ImageSource="CoffeeBeans.jpg"},
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Coffee Liberated inc.", Description="Description." },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "South kingsman road 12", Description="Description." },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Johns Plantation", Description="Description." }
             };
         }
 

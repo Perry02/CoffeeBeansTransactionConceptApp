@@ -5,6 +5,7 @@
              Title="{Binding Title}">
 
     <StackLayout Spacing="20" Padding="15">
+        <Image Source="{Binding Image}" />
         <Label Text="Text:" FontSize="Medium" />
         <Label Text="{Binding Text}" FontSize="Small"/>
         <Label Text="Description:" FontSize="Medium" />

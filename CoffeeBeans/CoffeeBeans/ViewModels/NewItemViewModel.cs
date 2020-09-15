@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
+using System.IO;
 using CoffeeBeans.Models;
 using Xamarin.Forms;
 
@@ -11,11 +12,13 @@ namespace CoffeeBeans.ViewModels
     {
         private string text;
         private string description;
+        private ImageSource imageSource;
 
         public NewItemViewModel()
         {
             SaveCommand = new Command(OnSave, ValidateSave);
             CancelCommand = new Command(OnCancel);
+            AddImage = new Command(OnAddedImage);
             this.PropertyChanged +=
                 (_, __) => SaveCommand.ChangeCanExecute();
         }
@@ -38,8 +41,15 @@ namespace CoffeeBeans.ViewModels
             set => SetProperty(ref description, value);
         }
 
+        public ImageSource ImageSource
+        {
+            get => imageSource;
+            set => SetProperty(ref imageSource, value);
+        }
+
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
+        public Command AddImage { get; }
 
         private async void OnCancel()
         {
@@ -60,6 +70,16 @@ namespace CoffeeBeans.ViewModels
 
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");
+        }
+
+        private async void OnAddedImage()
+        {
+            //https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/dependency-service/photo-picker
+            Stream stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
+            if (stream != null)
+            {
+                imageSource = ImageSource.FromStream(() => stream);
+            }
         }
     }
 }
