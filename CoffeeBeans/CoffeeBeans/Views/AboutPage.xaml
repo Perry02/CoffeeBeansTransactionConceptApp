@@ -16,19 +16,20 @@
     </ContentPage.Resources>
 
     <StackLayout>
-        <RelativeLayout HeightRequest="30">
-            <Image Source="RobustaCoffeeBeans.jpg" Aspect="Fill"/>
-            <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="#E0E0E0" TranslationY="100" Opacity="0.6">
-                <Label Text="test" />
+
+        <StackLayout Orientation="Vertical" Spacing="0">
+            <StackLayout Orientation="Horizontal" HeightRequest="120">
+                <Image Source="RobustaCoffeeBeans.jpg" Aspect="AspectFill" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
-        </RelativeLayout>
-        <RelativeLayout HeightRequest="30">
-            <Image Source="RobustaCoffeeBeans.jpg" Aspect="Fill" VerticalOptions="Center" HeightRequest="50"/>
-            <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="#E0E0E0" Opacity="0.6">
-                <Label Text="test" />
+            <StackLayout Opacity="0.7" BackgroundColor="#060606" HeightRequest="40" Margin="0,-40,0,0" Orientation="Horizontal">
+                <Label Text="Coffee Species" FontSize="Title" TextColor="White" VerticalOptions="Center"/>
+                <Label Text="Price" FontSize="Body" TextColor="White" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"/>
             </StackLayout>
-        </RelativeLayout>
+        </StackLayout>
+
         
+
+
         <StackLayout Orientation="Horizontal" HeightRequest="120">
             <Image Source="RobustaCoffeeBeans.jpg" Aspect="AspectFill" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
         </StackLayout>

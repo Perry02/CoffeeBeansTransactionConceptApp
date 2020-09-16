@@ -16,9 +16,12 @@
                     <Entry Text="{Binding Price, Mode=TwoWay}" FontSize="Medium" Keyboard="Numeric"/>
                 </StackLayout>
             </StackLayout>
-            <Label Text="Description" FontSize="Medium" />
-            <Editor Text="{Binding Description, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
-            <Image x:Name="addedimage" HorizontalOptions="Fill"/>
+            <StackLayout VerticalOptions="FillAndExpand">
+                <Label Text="Description" FontSize="Medium" />
+                <Editor Text="{Binding Description, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+                <Image x:Name="addedimage"/>
+            </StackLayout>
+
             <Button Text="Add Image" Clicked="OnAddPhotoButtonClicked"></Button>
             <StackLayout Orientation="Horizontal">
                 <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>

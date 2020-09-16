@@ -21,18 +21,16 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="10" x:DataType="model:Item">
-                        <Label Text="{Binding Text}" 
-                            LineBreakMode="NoWrap" 
-                            Style="{DynamicResource ListItemTextStyle}" 
-                            FontSize="16" />
-                        <Label Text="{Binding Description}" 
-                            LineBreakMode="NoWrap"
-                            Style="{DynamicResource ListItemDetailTextStyle}"
-                            FontSize="13" />
-                        <Label Text='"{Binding Price}" + kg/euro'
-                            LineBreakMode="NoWrap"
-                            Style="{DynamicResource ListItemDetailTextStyle}"
-                            FontSize="14" />
+                        <StackLayout Orientation="Vertical" Spacing="0">
+                            <StackLayout Orientation="Horizontal" HeightRequest="120">
+                                <Image Source="{Binding ImageSource}" Aspect="AspectFill" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                            </StackLayout>
+                            <StackLayout Opacity="0.7" BackgroundColor="#060606" HeightRequest="40" Margin="0,-40,0,0" Orientation="Horizontal">
+                                <Label Text="{Binding Text}" FontSize="Title" TextColor="White" VerticalOptions="Center"/>
+                                <Label Text="{Binding Price}" FontSize="Body" TextColor="White" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"/>
+                                <Label Text="kg/euro" FontSize="Body" TextColor="White" HorizontalOptions="End" VerticalOptions="EndAndExpand"/>
+                            </StackLayout>
+                        </StackLayout>
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"

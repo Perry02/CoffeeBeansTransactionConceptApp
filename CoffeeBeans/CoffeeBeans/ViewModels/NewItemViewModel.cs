@@ -12,13 +12,13 @@ namespace CoffeeBeans.ViewModels
     {
         private string text;
         private string description;
+        private float price;
         private ImageSource imageSource;
 
         public NewItemViewModel()
         {
             SaveCommand = new Command(OnSave, ValidateSave);
             CancelCommand = new Command(OnCancel);
-            AddImage = new Command(OnAddedImage);
             this.PropertyChanged +=
                 (_, __) => SaveCommand.ChangeCanExecute();
         }
@@ -41,15 +41,21 @@ namespace CoffeeBeans.ViewModels
             set => SetProperty(ref description, value);
         }
 
+        public float Price
+        {
+            get => price;
+            set => SetProperty(ref price, value);
+        }
+
         public ImageSource ImageSource
         {
             get => imageSource;
             set => SetProperty(ref imageSource, value);
         }
 
+
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
-        public Command AddImage { get; }
 
         private async void OnCancel()
         {
@@ -63,23 +69,15 @@ namespace CoffeeBeans.ViewModels
             {
                 Id = Guid.NewGuid().ToString(),
                 Text = Text,
-                Description = Description
+                Description = Description,
+                Price = Price,
+                ImageSource = ImageSource
             };
 
             await DataStore.AddItemAsync(newItem);
 
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");
-        }
-
-        private async void OnAddedImage()
-        {
-            //https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/dependency-service/photo-picker
-            Stream stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
-            if (stream != null)
-            {
-                imageSource = ImageSource.FromStream(() => stream);
-            }
         }
     }
 }

@@ -4,12 +4,35 @@
              x:Class="CoffeeBeans.Views.ItemDetailPage"
              Title="{Binding Title}">
 
-    <StackLayout Spacing="20" Padding="15">
-        <Image Source="{Binding Image}" />
-        <Label Text="Text:" FontSize="Medium" />
-        <Label Text="{Binding Text}" FontSize="Small"/>
+    <StackLayout Spacing="20" Padding="15" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                <Label Text="Text:" FontSize="Medium" />
+                <Label Text="{Binding Text}" FontSize="Small"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                <Label Text="Price / Kilo:" FontSize="Medium" />
+                <Label Text="{Binding Price}" FontSize="Small"/>
+            </StackLayout>
+        </StackLayout>
         <Label Text="Description:" FontSize="Medium" />
         <Label Text="{Binding Description}" FontSize="Small"/>
+        <StackLayout Orientation="Horizontal" HeightRequest="200">
+            <Image Source="{Binding ImageSource}" Aspect="AspectFill" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+        </StackLayout>
+
+        <StackLayout VerticalOptions="EndAndExpand">
+            <StackLayout>
+                <Label Text="Order Amount" FontSize="Medium" />
+                <Entry Text="{Binding Text, Mode=TwoWay}" FontSize="Medium"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical">
+                <Label Text="Price:" />
+                <Label Text="{Binding PriceCal}" />
+            </StackLayout>
+            <Button Text="Place Order" Command="{Binding BuyCommand}" HorizontalOptions="FillAndExpand"></Button>
+        </StackLayout>
     </StackLayout>
+    
     
 </ContentPage>

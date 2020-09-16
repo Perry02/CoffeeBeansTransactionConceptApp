@@ -12,6 +12,8 @@ namespace CoffeeBeans.ViewModels
         private string itemId;
         private string text;
         private string description;
+        private ImageSource imageSource;
+        private float price;
         public string Id { get; set; }
 
         public string Text
@@ -24,6 +26,18 @@ namespace CoffeeBeans.ViewModels
         {
             get => description;
             set => SetProperty(ref description, value);
+        }
+
+        public float Price
+        {
+            get => price;
+            set => SetProperty(ref price, value);
+        }
+
+        public ImageSource ImageSource
+        {
+            get => imageSource;
+            set => SetProperty(ref imageSource, value);
         }
 
         public string ItemId
@@ -47,6 +61,8 @@ namespace CoffeeBeans.ViewModels
                 Id = item.Id;
                 Text = item.Text;
                 Description = item.Description;
+                Price = item.Price;
+                ImageSource = item.ImageSource;
             }
             catch (Exception)
             {
