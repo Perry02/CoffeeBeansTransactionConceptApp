@@ -13,11 +13,19 @@ namespace CoffeeBeans.ViewModels
     public class ItemsViewModel : BaseViewModel
     {
         private Item _selectedItem;
+        private string _itemSearchKeyword;
+        private bool _hasItems = false;
 
         public ObservableCollection<Item> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Item> ItemTapped { get; }
+
+        public Command SearchAll { get; }
+        public Command SearchArabica { get; }
+        public Command SearchRobusta { get; }
+
+   
 
         public ItemsViewModel()
         {
@@ -28,19 +36,41 @@ namespace CoffeeBeans.ViewModels
             ItemTapped = new Command<Item>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
+
+            SearchAll = new Command(OnSearchAll);
+            SearchArabica = new Command(OnSearchArabica);
+            SearchRobusta = new Command(OnSearchRobusta);
         }
 
         async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
 
+            if (!_hasItems)
+            {
+                await DataStore.RandomizeItems();
+                _hasItems = true;
+            }
+
             try
             {
                 Items.Clear();
                 var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
+                if (_itemSearchKeyword != null)
                 {
-                    Items.Add(item);
+                    foreach (var item in items)
+                    {
+                        if (item.Type == _itemSearchKeyword)
+                        {
+                            Items.Add(item);
+                        }
+                    }
+                } else
+                {
+                    foreach (var item in items)
+                    {
+                        Items.Add(item);
+                    }
                 }
             }
             catch (Exception ex)
@@ -81,6 +111,26 @@ namespace CoffeeBeans.ViewModels
 
             // This will push the ItemDetailPage onto the navigation stack
             await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+        }
+
+
+        // TODO simplify
+        private void OnSearchAll()
+        {
+            _itemSearchKeyword = null;
+            ExecuteLoadItemsCommand();
+        }
+
+        private void OnSearchArabica()
+        {
+            _itemSearchKeyword = "arabica";
+            ExecuteLoadItemsCommand();
+        }
+
+        private void OnSearchRobusta()
+        {
+            _itemSearchKeyword = "robusta";
+            ExecuteLoadItemsCommand();
         }
     }
 }

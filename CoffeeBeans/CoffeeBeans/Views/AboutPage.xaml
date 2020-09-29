@@ -16,23 +16,8 @@
     </ContentPage.Resources>
 
     <StackLayout>
-
-        <StackLayout Orientation="Vertical" Spacing="0">
-            <StackLayout Orientation="Horizontal" HeightRequest="120">
-                <Image Source="RobustaCoffeeBeans.jpg" Aspect="AspectFill" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-            </StackLayout>
-            <StackLayout Opacity="0.7" BackgroundColor="#060606" HeightRequest="40" Margin="0,-40,0,0" Orientation="Horizontal">
-                <Label Text="Coffee Species" FontSize="Title" TextColor="White" VerticalOptions="Center"/>
-                <Label Text="Price" FontSize="Body" TextColor="White" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"/>
-            </StackLayout>
-        </StackLayout>
-
-        
-
-
-        <StackLayout Orientation="Horizontal" HeightRequest="120">
-            <Image Source="RobustaCoffeeBeans.jpg" Aspect="AspectFill" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-        </StackLayout>
+        <Grid Padding="5" BackgroundColor="DodgerBlue" HeightRequest="40">
+            <Label Text="Test" FontSize="Title" FontAttributes="Bold" VerticalOptions="CenterAndExpand"/>
+        </Grid>
     </StackLayout>
-
 </ContentPage>

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CoffeeBeans.Views.ItemsPendingPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:CoffeeBeans.ViewModels"  
+             xmlns:model="clr-namespace:CoffeeBeans.Models"  
+             x:Name="BrowseItemsPendingPage">
+
+    <ContentPage.ToolbarItems>
+        <!--ToolbarItem Text="Filter" Command="{Binding FilterCommand}" / -->
+    </ContentPage.ToolbarItems>
+    <!--
+      x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
+      https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
+    -->
+
+    <StackLayout>
+        <Label Text="In transit" />
+        <ListView x:Name="OrderList" IsGroupingEnabled="True" IsPullToRefreshEnabled="true" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" ItemsSource="{Binding Items}" RefreshCommand="{Binding LoadOrdersCommand}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10" x:DataType="model:Item">
+                        <StackLayout Orientation="Vertical" Spacing="0">
+                            <StackLayout Orientation="Horizontal" HeightRequest="120">
+                                <Image Source="{Binding ImageSource}" Aspect="AspectFill" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                            </StackLayout>
+                            <StackLayout Opacity="0.7" BackgroundColor="#060606" HeightRequest="40" Margin="0,-40,0,0" Orientation="Horizontal">
+                                <Label Text="{Binding Text}" FontSize="Title" TextColor="White" VerticalOptions="Center"/>
+                                <Label Text="{Binding Price}" FontSize="Body" TextColor="White" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"/>
+                                <Label Text="kg/euro" FontSize="Body" TextColor="White" HorizontalOptions="End" VerticalOptions="EndAndExpand"/>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemsViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <Grid Padding="5" BackgroundColor="DodgerBlue" HeightRequest="40">
+                        <Label Text="{Binding Name}" FontSize="Title" FontAttributes="Bold" VerticalOptions="CenterAndExpand"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+        </ListView>
+        <Label Text="Orders" />
+        <Label Text="Past transactions" />
+    </StackLayout>
+</ContentPage>

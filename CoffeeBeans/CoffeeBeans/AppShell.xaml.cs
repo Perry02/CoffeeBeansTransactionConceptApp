@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CoffeeBeans.ViewModels;
+using CoffeeBeans.Services;
 using CoffeeBeans.Views;
 using Xamarin.Forms;
 
