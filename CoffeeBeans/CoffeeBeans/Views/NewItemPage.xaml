@@ -9,7 +9,7 @@
             <StackLayout Orientation="Horizontal">
                 <StackLayout HorizontalOptions="FillAndExpand">
                     <Label Text="Coffee Species" FontSize="Medium" />
-                    <Entry Text="{Binding Text, Mode=TwoWay}" FontSize="Medium" />
+                    <Picker Title="{Binding Text, Mode=TwoWay}" ItemsSource="{Binding SpeciesList}"/>
                 </StackLayout>
                 <StackLayout HorizontalOptions="FillAndExpand">
                     <Label Text="Price/Kilogram" FontSize="Medium" />

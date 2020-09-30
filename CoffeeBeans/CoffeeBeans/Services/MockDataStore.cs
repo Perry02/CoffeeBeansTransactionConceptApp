@@ -79,7 +79,7 @@ namespace CoffeeBeans.Services
                         Id = Guid.NewGuid().ToString(),
                         Text = ItemAttributes.names[rnd.Next(0, ItemAttributes.names.Length)],
                         Description = ItemAttributes.descriptions[rnd.Next(0, ItemAttributes.descriptions.Length)],
-                        Price = rnd.Next(40, 60),
+                        Price = rnd.Next(30, 45) / 10f,
                         ImageSource = _imageSource,
                         Type = ItemAttributes.types[_type]
                     };

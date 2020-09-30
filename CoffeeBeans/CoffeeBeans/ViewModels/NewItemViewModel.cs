@@ -10,9 +10,10 @@ namespace CoffeeBeans.ViewModels
 {
     public class NewItemViewModel : BaseViewModel
     {
-        private string text;
+        private string text = "None selected";
         private string description;
         private float price;
+        private List<string> speciesList = new List<string> { "arabica", "robusta" };
         private ImageSource imageSource;
 
         public NewItemViewModel()
@@ -45,6 +46,12 @@ namespace CoffeeBeans.ViewModels
         {
             get => price;
             set => SetProperty(ref price, value);
+        }
+
+        public List<string> SpeciesList
+        {
+            get => speciesList;
+            set => SetProperty(ref speciesList, value);
         }
 
         public ImageSource ImageSource

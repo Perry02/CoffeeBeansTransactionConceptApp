@@ -14,7 +14,16 @@ namespace CoffeeBeans.ViewModels
         private string description;
         private ImageSource imageSource;
         private float price;
+        private float priceOrder;
+        private float priceCal;
         public string Id { get; set; }
+
+        public ItemDetailViewModel ()
+        {
+            OrderAmountCommand = new Command(OnOrderAmount);
+        }
+
+        public Command OrderAmountCommand { get; }
 
         public string Text
         {
@@ -32,6 +41,18 @@ namespace CoffeeBeans.ViewModels
         {
             get => price;
             set => SetProperty(ref price, value);
+        }
+
+        public float PriceOrder
+        {
+            get => priceOrder;
+            set => SetProperty(ref priceOrder, value);
+        }
+
+        public float PriceCal
+        {
+            get => priceCal;
+            set => SetProperty(ref priceCal, value);
         }
 
         public ImageSource ImageSource
@@ -68,6 +89,13 @@ namespace CoffeeBeans.ViewModels
             {
                 Debug.WriteLine("Failed to Load Item");
             }
+        }
+
+        private void OnOrderAmount()
+        {
+            PriceCal = priceOrder * price;
+
+            //await Shell.Current.GoToAsync("..");
         }
     }
 }

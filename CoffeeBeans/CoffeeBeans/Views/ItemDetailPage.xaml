@@ -7,7 +7,7 @@
     <StackLayout Spacing="20" Padding="15" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <StackLayout Orientation="Horizontal">
             <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                <Label Text="Text:" FontSize="Medium" />
+                <Label Text="Species:" FontSize="Medium" />
                 <Label Text="{Binding Text}" FontSize="Small"/>
             </StackLayout>
             <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
@@ -24,11 +24,11 @@
         <StackLayout VerticalOptions="EndAndExpand">
             <StackLayout>
                 <Label Text="Order Amount" FontSize="Medium" />
-                <Entry Text="{Binding Text, Mode=TwoWay}" FontSize="Medium"/>
+                <Entry Text="{Binding PriceOrder, Mode=TwoWay}" ReturnCommand="{Binding OrderAmountCommand}" FontSize="Medium" Keyboard="Numeric"/>
             </StackLayout>
             <StackLayout Orientation="Vertical">
                 <Label Text="Price:" />
-                <Label Text="{Binding PriceCal}" />
+                <Label Text="{Binding PriceCal}"/>
             </StackLayout>
             <Button Text="Place Order" Command="{Binding BuyCommand}" HorizontalOptions="FillAndExpand"></Button>
         </StackLayout>

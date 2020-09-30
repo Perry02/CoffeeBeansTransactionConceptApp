@@ -8,7 +8,7 @@
              x:Name="BrowseItemsPage">
 
     <ContentPage.ToolbarItems>
-        
+        <ToolbarItem Text="+" Command="{Binding AddItemCommand}" />
     </ContentPage.ToolbarItems>
     <!--
       x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
@@ -30,7 +30,7 @@
                                 <StackLayout Opacity="0.7" BackgroundColor="#060606" HeightRequest="40" Margin="0,-40,0,0" Orientation="Horizontal">
                                     <Label Text="{Binding Text}" FontSize="Title" TextColor="White" VerticalOptions="Center"/>
                                     <Label Text="{Binding Price}" FontSize="Body" TextColor="White" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"/>
-                                    <Label Text="kg/euro" FontSize="Body" TextColor="White" HorizontalOptions="End" VerticalOptions="EndAndExpand"/>
+                                    <Label Text="euro/kg" FontSize="Body" TextColor="White" HorizontalOptions="End" VerticalOptions="EndAndExpand"/>
                                 </StackLayout>
                             </StackLayout>
                             <StackLayout.GestureRecognizers>
