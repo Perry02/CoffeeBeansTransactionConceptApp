@@ -5,18 +5,21 @@
              Title="{Binding Title}">
 
     <StackLayout Spacing="20" Padding="15" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <Label Text="{Binding Text}" FontSize="Title" FontAttributes="Bold"/>
         <StackLayout Orientation="Horizontal">
             <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
                 <Label Text="Species:" FontSize="Medium" />
-                <Label Text="{Binding Text}" FontSize="Small"/>
+                <Label Text="{Binding Type}" FontSize="Small"/>
             </StackLayout>
             <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
                 <Label Text="Price / Kilo:" FontSize="Medium" />
                 <Label Text="{Binding Price}" FontSize="Small"/>
             </StackLayout>
         </StackLayout>
-        <Label Text="Description:" FontSize="Medium" />
-        <Label Text="{Binding Description}" FontSize="Small"/>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Label Text="Description:" FontSize="Medium" />
+            <Label Text="{Binding Description}" FontSize="Small"/>
+        </StackLayout>
         <StackLayout Orientation="Horizontal" HeightRequest="200">
             <Image Source="{Binding ImageSource}" Aspect="AspectFill" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
         </StackLayout>
@@ -28,7 +31,10 @@
             </StackLayout>
             <StackLayout Orientation="Vertical">
                 <Label Text="Price:" />
-                <Label Text="{Binding PriceCal}"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding PriceCal}"/>
+                    <Label Text=" euro"/>
+                </StackLayout>
             </StackLayout>
             <Button Text="Place Order" Command="{Binding BuyCommand}" HorizontalOptions="FillAndExpand"></Button>
         </StackLayout>

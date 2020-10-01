@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CoffeeBeans.Views.ItemsPage2"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:CoffeeBeans.ViewModels"  
+             xmlns:model="clr-namespace:CoffeeBeans.Models"  
+             x:Name="BrowseItemsPage2">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+" Command="{Binding AddItemCommand}" />
+    </ContentPage.ToolbarItems>
+    <!--
+      x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
+      https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
+    -->
+
+    <StackLayout>
+        <RefreshView x:DataType="local:ItemsViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" FlexLayout.AlignSelf="Auto">
+            <CollectionView x:Name="ItemsListView"
+                ItemsSource="{Binding Items2}"
+                SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10" x:DataType="model:Item">
+                            <StackLayout Orientation="Vertical" Spacing="0">
+                                <StackLayout Orientation="Horizontal" HeightRequest="120">
+                                    <Image Source="{Binding ImageSource}" Aspect="AspectFill" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <StackLayout Opacity="0.7" BackgroundColor="#060606" HeightRequest="40" Margin="0,-40,0,0" Orientation="Horizontal">
+                                    <Label Text="{Binding Text}" FontSize="Title" TextColor="White" VerticalOptions="Center"/>
+                                    <Label Text="{Binding Price}" FontSize="Body" TextColor="White" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"/>
+                                    <Label Text="euro/kg" FontSize="Body" TextColor="White" HorizontalOptions="End" VerticalOptions="EndAndExpand"/>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemsViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <StackLayout Orientation="Horizontal" Spacing="5" Padding="10">
+            <Button Text="All" Command="{Binding SearchAll}" HorizontalOptions="FillAndExpand"/>
+            <Button Text="Arabica" Command="{Binding SearchArabica}" HorizontalOptions="FillAndExpand"/>
+            <Button Text="Robusta" Command="{Binding SearchRobusta}" HorizontalOptions="FillAndExpand"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
