@@ -10,6 +10,10 @@ namespace CoffeeBeans.Services
     public class MockDataStore : IDataStore<Item>
     {
         readonly List<Item> items;
+        readonly List<Item> itemsPending;
+        readonly List<Item> itemsTransit;
+        readonly List<Item> itemsHistory;
+
 
         public MockDataStore()
         {
@@ -19,11 +23,38 @@ namespace CoffeeBeans.Services
                 //new Item { Id = Guid.NewGuid().ToString(), Text = "Joe's Beans", Description="Description.", Price=60, ImageSource="RobustaCoffeeBeans.jpg", Type="arabica"},
                 //new Item { Id = Guid.NewGuid().ToString(), Text = "Bob's Coffee", Description="Description.", Price=60.5f, ImageSource="CoffeeBeans.jpg", Type="robusta"},
             };
+            itemsPending = new List<Item>()
+            {
+
+            };
+            itemsTransit = new List<Item>()
+            {
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Surya Thaker", Description="Description.", Price=30.4f, ImageSource="arabicabeans2.jpg", Type="arabica"},
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Tarun Dev Dayal", Description="Description.", Price=50, ImageSource="arabicacherries1.jpg", Type="arabica"},
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Sweta Yadav", Description="Description.", Price=46, ImageSource="robustabeans4.jpg", Type="robusta"},
+            };
+            itemsHistory = new List<Item>()
+            {
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Sheetal Usman", Description="Description.", Price=62, ImageSource="CoffeeBeansOnPlant.jpg", Type="arabica"},
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Baldev Ram Doctor", Description="Description.", Price=76, ImageSource="robustabeans4.jpg", Type="arabica"},
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Daanish Pardeshi", Description="Description.", Price=54.3f, ImageSource="robustabeans6.jpg", Type="robusta"},
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Brock Din", Description="Description.", Price=33.2f, ImageSource="robustaCherries.jpg", Type="robusta"},
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Tulsi Jatin Manda", Description="Description.", Price=85.3f, ImageSource="robustabeans2.jpg", Type="robusta"},
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Richa Chad", Description="Description.", Price=50.4f, ImageSource="robustabeans6.jpg", Type="robusta"},
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Brock Din", Description="Description.", Price=61, ImageSource="robustaCherries.jpg", Type="robusta"},
+            };
         }
 
         public async Task<bool> AddItemAsync(Item item)
         {
             items.Add(item);
+
+            return await Task.FromResult(true);
+        }
+
+        public async Task<bool> AddItemAsyncOrder(Item item)
+        {
+            itemsPending.Add(item);
 
             return await Task.FromResult(true);
         }
@@ -54,6 +85,22 @@ namespace CoffeeBeans.Services
         {
             return await Task.FromResult(items);
         }
+
+        // order page
+        public async Task<IEnumerable<Item>> GetItemsAsyncOrder(bool forceRefresh = false)
+        {
+            return await Task.FromResult(itemsPending);
+        }
+        public async Task<IEnumerable<Item>> GetItemsAsyncTransit(bool forceRefresh = false)
+        {
+            return await Task.FromResult(itemsTransit);
+        }
+        public async Task<IEnumerable<Item>> GetItemsAsyncHistory(bool forceRefresh = false)
+        {
+            return await Task.FromResult(itemsHistory);
+        }
+
+
 
 
         // randomize content

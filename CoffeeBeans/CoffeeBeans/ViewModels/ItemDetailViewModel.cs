@@ -22,9 +22,11 @@ namespace CoffeeBeans.ViewModels
         public ItemDetailViewModel ()
         {
             OrderAmountCommand = new Command(OnOrderAmount);
+            BuyCommand = new Command(OnBuyCommand);
         }
 
         public Command OrderAmountCommand { get; }
+        public Command BuyCommand { get; }
 
         public string Text
         {
@@ -104,6 +106,25 @@ namespace CoffeeBeans.ViewModels
             PriceCal = priceOrder * price;
 
             //await Shell.Current.GoToAsync("..");
+        }
+
+        private async void OnBuyCommand()
+        {
+            //buy
+            Item newItem = new Item()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Text = Text,
+                Description = Description,
+                Price = PriceCal,
+                ImageSource = ImageSource,
+                Type = Type,
+        };
+
+            await DataStore.AddItemAsyncOrder(newItem);
+
+            // This will pop the current page off the navigation stack
+            await Shell.Current.GoToAsync("..");
         }
     }
 }

@@ -7,6 +7,7 @@ using Xamarin.Forms;
 
 using CoffeeBeans.Models;
 using CoffeeBeans.Views;
+using System.Linq.Expressions;
 
 namespace CoffeeBeans.ViewModels
 {
@@ -14,9 +15,8 @@ namespace CoffeeBeans.ViewModels
     {
         private Item _selectedItem;
         private string _itemSearchKeyword = null;
-        private bool _hasItems = false;
 
-        public ObservableCollection<Item> Items { get; }
+        public ObservableCollection<Item> ItemsP { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Item> ItemTapped { get; }
@@ -30,7 +30,7 @@ namespace CoffeeBeans.ViewModels
         public ItemsPendingViewModel()
         {
             Title = "Orders";
-            Items = new ObservableCollection<Item>();
+            ItemsP = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
             ItemTapped = new Command<Item>(OnItemSelected);
@@ -46,23 +46,23 @@ namespace CoffeeBeans.ViewModels
 
             try
             {
-                Items.Clear();
+                ItemsP.Clear();
                 var items = await DataStore.GetItemsAsync(true);
-                if (_itemSearchKeyword != null)
+                if (_itemSearchKeyword == null)
                 {
-                    foreach (var item in items)
-                    {
-                        if (item.Type == _itemSearchKeyword)
-                        {
-                            Items.Add(item);
-                        }
-                    }
-                } else
+                    items = await DataStore.GetItemsAsyncOrder(true);
+                }
+                else if (_itemSearchKeyword == "transit")
                 {
-                    foreach (var item in items)
-                    {
-                        Items.Add(item);
-                    }
+                    items = await DataStore.GetItemsAsyncTransit(true);
+                }
+                else if (_itemSearchKeyword == "history")
+                {
+                    items = await DataStore.GetItemsAsyncHistory(true);
+                }
+                foreach (var item in items)
+                {
+                    ItemsP.Add(item);
                 }
             }
             catch (Exception ex)
@@ -110,13 +110,13 @@ namespace CoffeeBeans.ViewModels
 
         private void OnSearchInTransit()
         {
-            _itemSearchKeyword = "arabica";
+            _itemSearchKeyword = "transit";
             ExecuteLoadItemsCommand();
         }
 
         private void OnSearchHistory()
         {
-            _itemSearchKeyword = "robusta";
+            _itemSearchKeyword = "history";
             ExecuteLoadItemsCommand();
         }
     }

@@ -16,9 +16,9 @@
     -->
 
     <StackLayout>
-        <RefreshView x:DataType="local:ItemsViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" FlexLayout.AlignSelf="Auto">
+        <RefreshView x:DataType="local:ItemsPendingViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" FlexLayout.AlignSelf="Auto">
             <CollectionView x:Name="ItemsListView"
-                ItemsSource="{Binding Items}"
+                ItemsSource="{Binding ItemsP}"
                 SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -30,7 +30,7 @@
                                 <StackLayout Opacity="0.7" BackgroundColor="#060606" HeightRequest="40" Margin="0,-40,0,0" Orientation="Horizontal">
                                     <Label Text="{Binding Text}" FontSize="Title" TextColor="White" VerticalOptions="Center"/>
                                     <Label Text="{Binding Price}" FontSize="Body" TextColor="White" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"/>
-                                    <Label Text="euro/kg" FontSize="Body" TextColor="White" HorizontalOptions="End" VerticalOptions="EndAndExpand"/>
+                                    <Label Text="euros" FontSize="Body" TextColor="White" HorizontalOptions="End" VerticalOptions="EndAndExpand"/>
                                 </StackLayout>
                             </StackLayout>
                             <StackLayout.GestureRecognizers>

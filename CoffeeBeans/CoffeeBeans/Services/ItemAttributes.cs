@@ -7,7 +7,7 @@ namespace CoffeeBeans.Services
 {
     class ItemAttributes
     {
-        public static int maxLength = 10;
+        public static int maxLength = 12;
         public static string[] names =
         {
             "Richa Chad",
@@ -69,12 +69,24 @@ namespace CoffeeBeans.Services
         {
             "RobustaCoffeeBeans.jpg",
             "robustaCherries.jpg",
-            "robustaCoffeeBeans2.jpg"
+            "robustaCoffeeBeans2.jpg",
+            "robustaCherries2.jpg",
+            "robustaCherries3.jpg",
+            "robustabeans2.jpg",
+            "robustabeans3.jpg",
+            "robustabeans4.jpg",
+            "robustabeans5.jpg",
+            "robustabeans6.jpg",
         };
         public static ImageSource[] imageSourcesArabica =
 {
             "CoffeeBeansOnPlant.jpg",
-            "CoffeeBeans.jpg"
+            "CoffeeBeans.jpg",
+            "arabicabeans2.jpg",
+            "arabicabeans3.jpg",
+            "arabicabeans4.jpg",
+            "arabicabeans5.jpg",
+            "arabicacherries1.jpg",
         };
         public static string[] types =
         {

@@ -15,19 +15,19 @@ namespace CoffeeBeans.Views
 {
     public partial class ItemsPendingPage : ContentPage
     {
-        ItemsPendingViewModel _viewModel;
+        ItemsPendingViewModel _pendingViewModel;
 
         public ItemsPendingPage()
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new ItemsPendingViewModel();
+            BindingContext = _pendingViewModel = new ItemsPendingViewModel();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            _viewModel.OnAppearing();
+            _pendingViewModel.OnAppearing();
         }
     }
 }
